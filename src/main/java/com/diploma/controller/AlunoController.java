@@ -37,8 +37,8 @@ public class AlunoController {
         return alunoService.alteraAluno(aluno);
     }
 
-    @GetMapping("media{aluno}")
-    public Aluno calcularAluno(@PathVariable String nome){
-        return alunoService.calculaAluno();
+    @GetMapping("/media/{nome}")
+    public String calcularAluno(@PathVariable String nome){
+        return alunoService.calculaAluno(nome);
     }
 }

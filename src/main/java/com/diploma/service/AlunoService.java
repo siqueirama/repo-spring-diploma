@@ -1,7 +1,9 @@
 package com.diploma.service;
 
 import com.diploma.entity.Aluno;
+import com.diploma.entity.Disciplina;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +29,6 @@ public class AlunoService {
     }
 
 
-
     public String removeAluno(String nome) {
         for (Aluno aluno : listAluno) {
             if (aluno.getNome().equals(nome)) {
@@ -50,7 +51,20 @@ public class AlunoService {
     }
 
 
-    public Aluno calculaAluno() {
-        return null;
+    public String calculaAluno(String nome) {
+        for ( Aluno aluno : listAluno){
+            double media =0;
+            if (aluno.getNome().equals(nome)) {
+                for (int i=0; i< aluno.getDisciplinas().size(); i++){
+                    media += aluno.getDisciplinas().get(i).getNota();
+                }
+                Double mediaTotal =media/aluno.getDisciplinas().size();
+                String resultado = String.format("%.2f", mediaTotal);
+                String mensagem= "";
+                if (mediaTotal >= 9){ mensagem = "- PARABÉNS!";}
+                return aluno.toString()+"\n"+" Média: "+resultado + mensagem;
+            }
+        }
+        return "Aluno não encontrado!";
     }
 }
